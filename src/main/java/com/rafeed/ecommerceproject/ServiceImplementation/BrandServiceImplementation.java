@@ -4,7 +4,6 @@ import com.rafeed.ecommerceproject.CustomException.Exceptions.EntityAlreadyExist
 import com.rafeed.ecommerceproject.CustomException.Exceptions.EntityNotfoundException;
 import com.rafeed.ecommerceproject.Entity.Brand;
 import com.rafeed.ecommerceproject.Entity.Category;
-import com.rafeed.ecommerceproject.Entity.Product;
 import com.rafeed.ecommerceproject.Repository.BrandRepository;
 import com.rafeed.ecommerceproject.Repository.CategoryRepository;
 import com.rafeed.ecommerceproject.Service.BrandService;
@@ -25,7 +24,7 @@ public class BrandServiceImplementation implements BrandService {
     }
 
     @Override
-    public Brand saveBrand(Brand brand) throws EntityAlreadyExistsException {
+    public Brand saveBrand(Brand brand) throws EntityAlreadyExistsException, EntityNotfoundException {
 
         //check whether the brand already exists in the database or not
         //if already exists, then throw an exception
@@ -38,7 +37,7 @@ public class BrandServiceImplementation implements BrandService {
             brand.setCategory(categoryCheck);
         }
         else{
-            brand.setCategory( categoryRepository.save(brand.getCategory()));
+            throw new EntityNotfoundException("Category not found!");
         }
 
         //check if the brand with the specific category already exists in the brand table

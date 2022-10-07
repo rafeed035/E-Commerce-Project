@@ -8,7 +8,7 @@ import com.rafeed.ecommerceproject.Entity.Category;
 import java.util.List;
 
 public interface BrandService {
-    Brand saveBrand(Brand brand) throws EntityAlreadyExistsException;
+    Brand saveBrand(Brand brand) throws EntityAlreadyExistsException, EntityNotfoundException;
     Brand getBrandById(int brandId) throws EntityNotfoundException;
     Brand getBrandByName(String brandName) throws EntityNotfoundException;
     Brand updateBrand(int brandId, Brand brand) throws EntityNotfoundException, EntityAlreadyExistsException;

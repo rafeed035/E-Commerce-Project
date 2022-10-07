@@ -19,7 +19,7 @@ public class BrandController {
     }
 
     @PostMapping("/saveBrand")
-    public Brand saveBrand(@RequestBody Brand brand) throws EntityAlreadyExistsException {
+    public Brand saveBrand(@RequestBody Brand brand) throws EntityAlreadyExistsException, EntityNotfoundException {
         return brandService.saveBrand(brand);
     }
 

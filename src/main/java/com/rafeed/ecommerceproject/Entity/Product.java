@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @AllArgsConstructor
@@ -28,6 +29,7 @@ public class Product {
     )
     private int productId;
 
+    @NotBlank
     @Column(
             name = "product_name",
             nullable = false,
@@ -35,6 +37,7 @@ public class Product {
     )
     private String productName;
 
+    @NotBlank
     @Column(
             name = "product_specs",
             nullable = false
@@ -46,12 +49,14 @@ public class Product {
     )
     private String productDescription;
 
+    @NotBlank
     @Column(
             name = "product_price",
             nullable = false
     )
     private int productPrice;
 
+    @NotBlank
     @ManyToOne
     @JsonIgnore
     @JoinColumn(
@@ -61,6 +66,7 @@ public class Product {
     )
     private Brand brand;
 
+    @NotBlank
     @ManyToOne
     @JsonIgnore
     @JoinColumn(

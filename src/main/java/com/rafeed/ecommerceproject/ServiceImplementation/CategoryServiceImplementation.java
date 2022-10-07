@@ -16,12 +16,12 @@ import java.util.List;
 public class CategoryServiceImplementation implements CategoryService {
 
     private CategoryRepository categoryRepository;
-
-    @Autowired
     private BrandRepository brandRepository;
 
-    public CategoryServiceImplementation(CategoryRepository categoryRepository) {
+    public CategoryServiceImplementation(CategoryRepository categoryRepository,
+                                         BrandRepository brandRepository) {
         this.categoryRepository = categoryRepository;
+        this.brandRepository = brandRepository;
     }
 
     @Override
