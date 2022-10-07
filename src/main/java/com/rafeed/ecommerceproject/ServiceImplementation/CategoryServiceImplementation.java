@@ -2,9 +2,12 @@ package com.rafeed.ecommerceproject.ServiceImplementation;
 
 import com.rafeed.ecommerceproject.CustomException.Exceptions.EntityAlreadyExistsException;
 import com.rafeed.ecommerceproject.CustomException.Exceptions.EntityNotfoundException;
+import com.rafeed.ecommerceproject.Entity.Brand;
 import com.rafeed.ecommerceproject.Entity.Category;
+import com.rafeed.ecommerceproject.Repository.BrandRepository;
 import com.rafeed.ecommerceproject.Repository.CategoryRepository;
 import com.rafeed.ecommerceproject.Service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +16,9 @@ import java.util.List;
 public class CategoryServiceImplementation implements CategoryService {
 
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private BrandRepository brandRepository;
 
     public CategoryServiceImplementation(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;

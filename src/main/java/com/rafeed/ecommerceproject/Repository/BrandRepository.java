@@ -1,6 +1,7 @@
 package com.rafeed.ecommerceproject.Repository;
 
 import com.rafeed.ecommerceproject.Entity.Brand;
+import com.rafeed.ecommerceproject.Entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +11,7 @@ import java.util.List;
 public interface BrandRepository extends JpaRepository<Brand, Integer> {
 
     //get brand by category
-    List<Brand> getBrandsByCategory(String  categoryName);
+    List<Brand> getBrandsByCategory(Category category);
 
     //get brand by id
     Brand getBrandByBrandId(int brandId);

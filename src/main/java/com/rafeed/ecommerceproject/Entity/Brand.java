@@ -1,5 +1,7 @@
 package com.rafeed.ecommerceproject.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,6 +45,6 @@ public class Brand {
     )
     private Category category;
 
-    @OneToMany
-    private List<Product> productList;
+//    @OneToMany
+//    private List<Product> productList;
 }

@@ -34,9 +34,12 @@ public class Category {
     )
     private String categoryName;
 
-    @OneToMany
-    private List<Brand>brands;
-
-    @OneToMany
-    private List<Product>productList;
+//    @OneToMany(
+//            fetch = FetchType.LAZY,
+//            mappedBy = "category"
+//    )
+//    private List<Brand>brands;
+//
+//    @OneToMany
+//    private List<Product>productList;
 }

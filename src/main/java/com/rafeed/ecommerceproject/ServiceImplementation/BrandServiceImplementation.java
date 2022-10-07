@@ -30,29 +30,41 @@ public class BrandServiceImplementation implements BrandService {
         //check whether the brand already exists in the database or not
         //if already exists, then throw an exception
         //else save the entity
-        Brand brandCheck = brandRepository.getBrandByBrandId(brand.getBrandId());
-        if(brandCheck != null){
-            throw new EntityAlreadyExistsException("Entity already exists!");
+
+        //check if the category already exists in the category table
+        String categoryName = brand.getCategory().getCategoryName();
+        Category categoryCheck = categoryRepository.getCategoryByCategoryName(categoryName);
+        if(categoryCheck != null){
+            brand.setCategory(categoryCheck);
         }
         else{
-            //check if the category of the brand already exists in the database
-            Category categoryCheck = categoryRepository.getCategoryByCategoryName(brand.getCategory().getCategoryName());
-            brandCheck = brand;
-            if(categoryCheck != null){
-                brandCheck.setCategory(categoryCheck);
-            }
-            else{
-                brandCheck.setCategory(categoryRepository.save(brand.getCategory()));
-            }
-            return brandRepository.save(brandCheck);
+            brand.setCategory( categoryRepository.save(brand.getCategory()));
         }
+
+        //check if the brand with the specific category already exists in the brand table
+        List<Brand> brands = brandRepository.getBrandsByCategory(brand.getCategory());
+        Brand brandNew = brand;
+        if(brands.size() > 0){
+            for(int i=0; i<brands.size(); i++){
+                if(brands.get(i).getBrandName().equals(brand.getBrandName())){
+                    throw new EntityAlreadyExistsException("Entity Already exists");
+                }
+                else{
+                    brandNew = brand;
+                }
+            }
+        }
+        else{
+            brandNew = brand;
+        }
+        return brandRepository.save(brandNew);
     }
 
     @Override
     public Brand getBrandById(int brandId) throws EntityNotfoundException {
 
         //check whether the brand already exists in the database or not
-        //if does not exist, throw exception
+        //if it does not exist, throw exception
         //else return entity
         Brand brandCheck = brandRepository.getBrandByBrandId(brandId);
         if(brandCheck == null){
@@ -67,7 +79,7 @@ public class BrandServiceImplementation implements BrandService {
     public Brand getBrandByName(String brandName) throws EntityNotfoundException {
 
         //check whether the brand already exists in the database or not
-        //if does not exist, throw exception
+        //if it does not exist, throw exception
         //else return entity
         Brand brandCheck = brandRepository.getBrandByBrandName(brandName);
         if(brandCheck == null){
@@ -79,49 +91,66 @@ public class BrandServiceImplementation implements BrandService {
     }
 
     @Override
-    public Brand updateBrand(int brandId, Brand brand) throws EntityNotfoundException {
+    public Brand updateBrand(int brandId, Brand brand) throws EntityNotfoundException, EntityAlreadyExistsException {
 
         //check whether the brand already exists in the database or not
-        //if does not exist, throw exception
+        //if it does not exist, throw exception
         //else update entity
         Brand brandCheck = brandRepository.getBrandByBrandId( brandId);
         if(brandCheck == null){
             throw new EntityNotfoundException("Entity not found!!!");
         }
         else{
-            brandCheck.setBrandName(brand.getBrandName());
-            //check if the product list is updated or not
-            List<Product>productList = brand.getProductList();
-            if(productList.size() == 0){
-                brandCheck.setProductList(brandCheck.getProductList());
+            String brandName = brand.getBrandName();
+            Brand brandCheckWithName = brandRepository.getBrandByBrandName(brandName);
+            if(brandCheckWithName != null){
+                throw new EntityAlreadyExistsException("Entity Already Exists");
             }
             else{
-                brandCheck.setProductList(productList);
-            }
-            //check if the category of the brand already exists in the database
-            Category categoryCheck = categoryRepository.getCategoryByCategoryName(brand.getCategory().getCategoryName());
-            if(categoryCheck != null){
-                brandCheck.setCategory(categoryCheck);
-            }
-            else{
-                brandCheck.setCategory(categoryRepository.save(brand.getCategory()));
+                brandCheck.setBrandName(brand.getBrandName());
+                //check if the category of the brand already exists in the database
+                String categoryName = brand.getCategory().getCategoryName();
+                Category categoryCheck = categoryRepository.getCategoryByCategoryName(categoryName);
+                if(categoryCheck != null){
+                    brandCheck.setCategory(categoryCheck);
+                }
+                else{
+                    throw new EntityNotfoundException("Category does not exist!");
+                }
             }
             return brandRepository.save(brandCheck);
         }
     }
 
     @Override
-    public List<Brand> getBrandsByCategory(String categoryName) {
-        return null;
+    public List<Brand> getBrandsByCategory(String categoryName) throws EntityNotfoundException {
+        //check if the category of the brand already exists in the database
+        Category categoryCheck = categoryRepository.getCategoryByCategoryName(categoryName);
+        if(categoryCheck == null){
+            throw new EntityNotfoundException("Entity not found!!!");
+        }
+        else{
+            return brandRepository.getBrandsByCategory(categoryCheck);
+        }
     }
 
     @Override
     public List<Brand> getAllBrands() {
-        return null;
+        return brandRepository.findAll();
     }
 
     @Override
-    public void deleteBrand(int brandId) {
+    public void deleteBrand(int brandId) throws EntityNotfoundException {
 
+        //check whether the brand already exists in the database or not
+        //if it does not exist, throw exception
+        //else delete entity
+        Brand brandCheck= brandRepository.getBrandByBrandId(brandId);
+        if(brandCheck == null){
+            throw new EntityNotfoundException("Entity not found!!!");
+        }
+        else{
+            brandRepository.delete(brandCheck);
+        }
     }
 }

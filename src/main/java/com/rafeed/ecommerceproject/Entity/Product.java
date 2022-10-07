@@ -1,5 +1,6 @@
 package com.rafeed.ecommerceproject.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -52,6 +53,7 @@ public class Product {
     private int productPrice;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(
             name = "brand_id",
             referencedColumnName = "brand_id",
@@ -60,6 +62,7 @@ public class Product {
     private Brand brand;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(
             name = "category_id",
             referencedColumnName = "category_id",

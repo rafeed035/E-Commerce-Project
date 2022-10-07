@@ -39,12 +39,12 @@ public class CategoryController {
     }
 
     @PutMapping("/updateCategory")
-    public Category updateCategory(int categoryId, Category category) throws EntityNotfoundException {
+    public Category updateCategory(@RequestParam int categoryId, @RequestBody Category category) throws EntityNotfoundException {
         return categoryService.updateCategory(categoryId, category);
     }
 
     @DeleteMapping("/deleteCategory")
-    public String deleteCategory(int categoryId) throws EntityNotfoundException {
+    public String deleteCategory(@RequestParam int categoryId) throws EntityNotfoundException {
         categoryService.deleteCategory(categoryId);
         return "Deleted";
     }
