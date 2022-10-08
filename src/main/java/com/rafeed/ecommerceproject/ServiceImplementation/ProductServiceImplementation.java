@@ -107,16 +107,14 @@ public class ProductServiceImplementation implements ProductService {
                 throw new EntityNotfoundException("Brand or Category does not exist!");
             }
             else{
-                productCheck = product;
                 productCheck.setProductName(product.getProductName());
                 productCheck.setProductSpecs(product.getProductSpecs());
                 productCheck.setProductDescription(product.getProductDescription());
                 productCheck.setProductPrice(product.getProductPrice());
                 productCheck.setBrand(brandCheck);
                 productCheck.setCategory(categoryCheck);
-                productRepository.save(productCheck);
             }
-            return productCheck;
+            return productRepository.save(productCheck);
         }
     }
 
