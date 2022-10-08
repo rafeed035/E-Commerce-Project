@@ -10,7 +10,7 @@ public interface ProductService {
     Product saveProduct(Product product) throws EntityAlreadyExistsException, EntityNotfoundException;
     Product getProductById(int productId) throws EntityNotfoundException;
     Product getProductByName(String productName) throws EntityNotfoundException;
-    Product updateProduct(int productId, Product product) throws EntityNotfoundException;
+    Product updateProduct(int productId, Product product) throws EntityNotfoundException, EntityAlreadyExistsException;
     List<Product> getProductsByCategory(String categoryName) throws EntityNotfoundException;
     List<Product> getProductsByBrand(String brandName) throws EntityNotfoundException;
     List<Product> getProductsByCategoryAndBrand(String categoryName, String brandName) throws EntityNotfoundException;

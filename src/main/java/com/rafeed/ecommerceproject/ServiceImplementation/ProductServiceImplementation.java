@@ -88,7 +88,7 @@ public class ProductServiceImplementation implements ProductService {
     }
 
     @Override
-    public Product updateProduct(int productId, Product product) throws EntityNotfoundException {
+    public Product updateProduct(int productId, Product product) throws EntityNotfoundException, EntityAlreadyExistsException {
 
         //check whether the product already exists in the database or not
         //if it does not exist, then throw an exception
@@ -107,14 +107,16 @@ public class ProductServiceImplementation implements ProductService {
                 throw new EntityNotfoundException("Brand or Category does not exist!");
             }
             else{
+                productCheck = product;
                 productCheck.setProductName(product.getProductName());
                 productCheck.setProductSpecs(product.getProductSpecs());
                 productCheck.setProductDescription(product.getProductDescription());
                 productCheck.setProductPrice(product.getProductPrice());
-                productCheck.setBrand(product.getBrand());
-                productCheck.setCategory(product.getCategory());
+                productCheck.setBrand(brandCheck);
+                productCheck.setCategory(categoryCheck);
+                productRepository.save(productCheck);
             }
-            return productRepository.save(productCheck);
+            return productCheck;
         }
     }
 

@@ -35,7 +35,7 @@ public class ProductController {
     }
 
     @PutMapping("/updateProduct")
-    public Product updateProduct(@RequestParam int productId, @RequestBody Product product) throws EntityNotfoundException {
+    public Product updateProduct(@RequestParam int productId, @RequestBody Product product) throws EntityNotfoundException, EntityAlreadyExistsException {
         return productService.updateProduct(productId, product);
     }
 
