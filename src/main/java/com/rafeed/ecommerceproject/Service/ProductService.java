@@ -12,8 +12,8 @@ public interface ProductService {
     Product getProductByName(String productName) throws EntityNotfoundException;
     Product updateProduct(int productId, Product product) throws EntityNotfoundException;
     List<Product> getProductsByCategory(String categoryName) throws EntityNotfoundException;
-    List<Product> getProductsByBrand(String brandName);
-    List<Product> getProductsByCategoryAndBrand(String categoryName, String brandName);
+    List<Product> getProductsByBrand(String brandName) throws EntityNotfoundException;
+    List<Product> getProductsByCategoryAndBrand(String categoryName, String brandName) throws EntityNotfoundException;
     List<Product> getAllProducts();
-    void deleteProduct(int productId);
+    void deleteProduct(int productId) throws EntityNotfoundException;
 }

@@ -37,7 +37,9 @@ public class Brand {
     )
     private String brandName;
 
-    @ManyToOne
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
     @JoinColumn(
             name = "category_id",
             referencedColumnName = "category_id",

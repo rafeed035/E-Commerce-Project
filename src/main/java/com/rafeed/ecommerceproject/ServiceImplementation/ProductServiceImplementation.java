@@ -49,13 +49,20 @@ public class ProductServiceImplementation implements ProductService {
                 throw new EntityNotfoundException("Brand or Category does not exist!");
             }
             else{
-                return productRepository.save(product);
+                productCheck = product;
+                productCheck.setBrand(brandCheck);
+                productCheck.setCategory(categoryCheck);
+                return productRepository.save(productCheck);
             }
         }
     }
 
     @Override
     public Product getProductById(int productId) throws EntityNotfoundException {
+
+        //check whether the product already exists in the database or not
+        //if it does not exist, then throw an exception
+        //else return the entity
         Product productCheck = productRepository.getProductByProductId(productId);
         if(productCheck == null){
             throw new EntityNotfoundException("Product does not exist!");
@@ -67,6 +74,10 @@ public class ProductServiceImplementation implements ProductService {
 
     @Override
     public Product getProductByName(String productName) throws EntityNotfoundException {
+
+        //check whether the product already exists in the database or not
+        //if it does not exist, then throw an exception
+        //else return the entity
         Product productCheck = productRepository.getProductByProductName(productName);
         if(productCheck == null){
             throw new EntityNotfoundException("Product does not exist!");
@@ -78,6 +89,10 @@ public class ProductServiceImplementation implements ProductService {
 
     @Override
     public Product updateProduct(int productId, Product product) throws EntityNotfoundException {
+
+        //check whether the product already exists in the database or not
+        //if it does not exist, then throw an exception
+        //else update the entity
         Product productCheck = productRepository.getProductByProductId(productId);
         if(productCheck == null){
             throw new EntityNotfoundException("Product does not exist!");
@@ -105,30 +120,59 @@ public class ProductServiceImplementation implements ProductService {
 
     @Override
     public List<Product> getProductsByCategory(String categoryName) throws EntityNotfoundException {
+
+        //check whether the category already exists in the database or not
+        //if it does not exist, then throw an exception
+        //else return the entity list
         Category categoryCheck = categoryRepository.getCategoryByCategoryName(categoryName);
         if(categoryCheck == null){
-            throw new EntityNotfoundException("Category does not exist");
+            throw new EntityNotfoundException("Category does not exist!");
         }
-        return null;
+        return productRepository.getProductsByCategory(categoryCheck);
     }
 
     @Override
-    public List<Product> getProductsByBrand(String brandName) {
-        return null;
+    public List<Product> getProductsByBrand(String brandName) throws EntityNotfoundException {
+
+        //check whether the brand already exists in the database or not
+        //if it does not exist, then throw an exception
+        //else return the entity list
+        Brand brandCheck = brandRepository.getBrandByBrandName(brandName);
+        if(brandCheck == null){
+            throw new EntityNotfoundException("Brand does not exist!");
+        }
+        return productRepository.getProductsByBrand(brandCheck);
     }
 
     @Override
-    public List<Product> getProductsByCategoryAndBrand(String categoryName, String brandName) {
-        return null;
+    public List<Product> getProductsByCategoryAndBrand(String categoryName, String brandName) throws EntityNotfoundException {
+
+        //check whether the category and brand already exists in the database or not
+        //if it does not exist, then throw an exception
+        //else return the entity list
+        Category categoryCheck = categoryRepository.getCategoryByCategoryName(categoryName);
+        Brand brandCheck = brandRepository.getBrandByBrandName(brandName);
+        if(categoryCheck == null || brandCheck == null){
+            throw new EntityNotfoundException("Brand or Category does not exist");
+        }
+        return productRepository.getProductsByCategoryAndBrand(categoryCheck, brandCheck);
     }
 
     @Override
     public List<Product> getAllProducts() {
-        return null;
+        return productRepository.findAll();
     }
 
     @Override
-    public void deleteProduct(int productId) {
+    public void deleteProduct(int productId) throws EntityNotfoundException {
 
+        //check whether the product already exists in the database or not
+        //if it does not exist, then throw an exception
+        //else delete the entity list
+        Product productDelete = productRepository.getProductByProductId(productId);
+        if(productDelete == null){
+            throw new EntityNotfoundException("Product does not exist");
+        }
+        productRepository.delete(productDelete);
     }
 }

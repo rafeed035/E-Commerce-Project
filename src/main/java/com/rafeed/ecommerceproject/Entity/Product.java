@@ -29,7 +29,6 @@ public class Product {
     )
     private int productId;
 
-    @NotBlank
     @Column(
             name = "product_name",
             nullable = false,
@@ -37,7 +36,6 @@ public class Product {
     )
     private String productName;
 
-    @NotBlank
     @Column(
             name = "product_specs",
             nullable = false
@@ -49,16 +47,13 @@ public class Product {
     )
     private String productDescription;
 
-    @NotBlank
     @Column(
             name = "product_price",
             nullable = false
     )
     private int productPrice;
 
-    @NotBlank
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(
             name = "brand_id",
             referencedColumnName = "brand_id",
@@ -66,9 +61,7 @@ public class Product {
     )
     private Brand brand;
 
-    @NotBlank
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(
             name = "category_id",
             referencedColumnName = "category_id",
