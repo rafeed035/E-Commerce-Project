@@ -78,7 +78,6 @@ public class UserController {
         if(!result.equalsIgnoreCase("valid")){
             return "Invalid token";
         }
-
         User user = userService.getUserByPasswordToken(token);
         userService.changePassword(user, passwordModel.getNewPassword());
         return "Password changed successfully";
@@ -86,14 +85,12 @@ public class UserController {
 
     private String passwordResetTokenMail(User user, String applicationUrl, String token) {
         String url = applicationUrl + "/savePassword?token=" + token;
-
         log.info("Click the link to reset your password: {}", url);
         return url;
     }
 
     private void resendVerificationTokenMail(User user, String applicationUrl, VerificationToken verificationToken) {
         String url = applicationUrl + "/verifyRegistration?token=" + verificationToken.getToken();
-
         log.info("Click the link to verify your account: {}", url);
     }
 
