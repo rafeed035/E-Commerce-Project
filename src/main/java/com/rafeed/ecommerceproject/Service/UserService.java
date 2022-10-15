@@ -23,4 +23,6 @@ public interface UserService {
     User getUserByPasswordToken(String token) throws EntityNotfoundException;
 
     void changePassword(User user, String newPassword);
+
+    boolean checkIfValidPassword(User user, String oldPassword);
 }

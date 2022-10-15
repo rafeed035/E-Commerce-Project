@@ -83,6 +83,16 @@ public class UserController {
         return "Password changed successfully";
     }
 
+    @PostMapping("/changePassword")
+    public String changePassword(@RequestBody PasswordModel passwordModel) throws EntityNotfoundException {
+        User user = userService.getUserByEmail(passwordModel.getEmail());
+        if(!userService.checkIfValidPassword(user, passwordModel.getOldPassword())){
+            return "Invalid old password";
+        }
+        userService.changePassword(user, passwordModel.getNewPassword());
+        return "Password changed successfully";
+    }
+
     private String passwordResetTokenMail(User user, String applicationUrl, String token) {
         String url = applicationUrl + "/savePassword?token=" + token;
         log.info("Click the link to reset your password: {}", url);

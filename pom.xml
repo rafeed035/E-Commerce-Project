@@ -71,6 +71,13 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-authorization-server</artifactId>
+            <version>0.2.0</version>
+        </dependency>
+
+
         <!--        &lt;!&ndash; https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter &ndash;&gt;-->
 <!--        <dependency>-->
 <!--            <groupId>io.springfox</groupId>-->
