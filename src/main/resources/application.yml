@@ -1,17 +1,31 @@
-server:
-      port: 8080
+#server:
+#      port: 8080
+#
+#spring:
+#  datasource:
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      password: rafeed2030
+#      url: jdbc:mysql://localhost:3306/e_com_dev
+#      username: root
+#  jpa:
+#      hibernate:
+#          ddl-auto: update
+#      properties:
+#          hibernate:
+#              dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+#              format_sql: true
+#      show-sql: true
 
 spring:
   datasource:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      password: rafeed2030
-      url: jdbc:mysql://localhost:3306/e_com_dev
-      username: root
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/e_com_dev
+    password: rafeed2030
   jpa:
+    properties:
       hibernate:
-          ddl-auto: update
-      properties:
-          hibernate:
-              dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-              format_sql: true
-      show-sql: true
+        dialect: org.hibernate.dialect.PostgreSQL81Dialect
+        format_sql: 'true'
+    show-sql: 'true'
+    hibernate:
+      ddl-auto: update

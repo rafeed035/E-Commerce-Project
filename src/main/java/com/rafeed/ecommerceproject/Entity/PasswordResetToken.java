@@ -10,6 +10,7 @@ import java.util.Date;
 @Entity
 @Data
 @NoArgsConstructor
+@Table(name = "passwordResetTokens")
 public class PasswordResetToken {
     private static final int EXPIRATION_TIME = 10;
 

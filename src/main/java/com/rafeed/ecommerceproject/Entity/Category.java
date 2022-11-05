@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "categories")
 public class Category {
     @Id
     @Column(
