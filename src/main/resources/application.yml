@@ -16,11 +16,25 @@
 #              format_sql: true
 #      show-sql: true
 
+#spring:
+#  datasource:
+#    username: postgres
+#    url: jdbc:postgresql://localhost:5432/e_com_dev
+#    password: rafeed2030
+#  jpa:
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQL81Dialect
+#        format_sql: 'true'
+#    show-sql: 'true'
+#    hibernate:
+#      ddl-auto: update
+
 spring:
   datasource:
-    username: postgres
-    url: jdbc:postgresql://localhost:5432/e_com_dev
-    password: rafeed2030
+    username: oxnrlcmuccewfu
+    url: jdbc:postgresql://ec2-54-80-123-146.compute-1.amazonaws.com:5432/d43k4s0c222qle
+    password: 690f6017a9e7b1ee041079b9029ca719a1b9d39859b593ac6e2788e2de55d31e
   jpa:
     properties:
       hibernate:
