@@ -41,7 +41,6 @@ public class UserServiceImplementation implements UserService {
         user.setAddress(userModel.getAddress());
         user.setEmail(userModel.getEmail());
         user.setPassword(passwordEncoder.encode(userModel.getPassword()));
-        user.setRole("USER");
 
         userRepository.save(user);
         return user;
@@ -83,7 +82,7 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User getUserByEmail(String email) throws EntityNotfoundException {
-        User user = userRepository.getUserByEmail(email);
+        User user = userRepository.getUserByEmailIgnoreCase(email);
         if(user == null){
             throw new EntityNotfoundException("User not found!");
         }

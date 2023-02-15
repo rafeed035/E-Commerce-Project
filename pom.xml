@@ -14,8 +14,14 @@
     <name>E-CommerceProject</name>
     <description>E-CommerceProject</description>
     <properties>
-        <java.version>8</java.version>
+        <java.version>17</java.version>
     </properties>
+
+<!--    for heroku-->
+<!--    <properties>-->
+<!--        <java.version>8</java.version>-->
+<!--    </properties>-->
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -84,6 +90,12 @@
             <version>0.2.0</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
 
         <!--        &lt;!&ndash; https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter &ndash;&gt;-->
 <!--        <dependency>-->
